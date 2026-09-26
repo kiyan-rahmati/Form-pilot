@@ -1,0 +1,188 @@
+[
+  {
+    "id": 1,
+    "province_id": 1,
+    "fa": "تبریز",
+    "en": "Tabriz"
+  },
+  {
+    "id": 2,
+    "province_id": 2,
+    "fa": "ارومیه",
+    "en": "Urmia"
+  },
+  {
+    "id": 3,
+    "province_id": 3,
+    "fa": "اردبیل",
+    "en": "Ardabil"
+  },
+  {
+    "id": 4,
+    "province_id": 4,
+    "fa": "اصفهان",
+    "en": "Isfahan"
+  },
+  {
+    "id": 5,
+    "province_id": 5,
+    "fa": "کرج",
+    "en": "Karaj"
+  },
+  {
+    "id": 6,
+    "province_id": 6,
+    "fa": "ایلام",
+    "en": "Ilam"
+  },
+  {
+    "id": 7,
+    "province_id": 7,
+    "fa": "بوشهر",
+    "en": "Bushehr"
+  },
+  {
+    "id": 8,
+    "province_id": 8,
+    "fa": "تهران",
+    "en": "Tehran"
+  },
+  {
+    "id": 9,
+    "province_id": 9,
+    "fa": "شهرکرد",
+    "en": "Shahrekord"
+  },
+  {
+    "id": 10,
+    "province_id": 10,
+    "fa": "بیرجند",
+    "en": "Birjand"
+  },
+  {
+    "id": 11,
+    "province_id": 11,
+    "fa": "مشهد",
+    "en": "Mashhad"
+  },
+  {
+    "id": 12,
+    "province_id": 12,
+    "fa": "بجنورد",
+    "en": "Bojnord"
+  },
+  {
+    "id": 13,
+    "province_id": 13,
+    "fa": "اهواز",
+    "en": "Ahvaz"
+  },
+  {
+    "id": 14,
+    "province_id": 14,
+    "fa": "زنجان",
+    "en": "Zanjan"
+  },
+  {
+    "id": 15,
+    "province_id": 15,
+    "fa": "سمنان",
+    "en": "Semnan"
+  },
+  {
+    "id": 16,
+    "province_id": 16,
+    "fa": "زاهدان",
+    "en": "Zahedan"
+  },
+  {
+    "id": 17,
+    "province_id": 17,
+    "fa": "شیراز",
+    "en": "Shiraz"
+  },
+  {
+    "id": 18,
+    "province_id": 18,
+    "fa": "قزوین",
+    "en": "Qazvin"
+  },
+  {
+    "id": 19,
+    "province_id": 19,
+    "fa": "قم",
+    "en": "Qom"
+  },
+  {
+    "id": 20,
+    "province_id": 20,
+    "fa": "سنندج",
+    "en": "Sanandaj"
+  },
+  {
+    "id": 21,
+    "province_id": 21,
+    "fa": "کرمان",
+    "en": "Kerman"
+  },
+  {
+    "id": 22,
+    "province_id": 22,
+    "fa": "کرمانشاه",
+    "en": "Kermanshah"
+  },
+  {
+    "id": 23,
+    "province_id": 23,
+    "fa": "یاسوج",
+    "en": "Yasuj"
+  },
+  {
+    "id": 24,
+    "province_id": 24,
+    "fa": "رشت",
+    "en": "Rasht"
+  },
+  {
+    "id": 25,
+    "province_id": 25,
+    "fa": "خرم‌آباد",
+    "en": "Khorramabad"
+  },
+  {
+    "id": 26,
+    "province_id": 26,
+    "fa": "ساری",
+    "en": "Sari"
+  },
+  {
+    "id": 27,
+    "province_id": 27,
+    "fa": "اراک",
+    "en": "Arak"
+  },
+  {
+    "id": 28,
+    "province_id": 28,
+    "fa": "بندرعباس",
+    "en": "Bandar Abbas"
+  },
+  {
+    "id": 29,
+    "province_id": 29,
+    "fa": "همدان",
+    "en": "Hamadan"
+  },
+  {
+    "id": 30,
+    "province_id": 30,
+    "fa": "یزد",
+    "en": "Yazd"
+  },
+  {
+    "id": 31,
+    "province_id": 31,
+    "fa": "گرگان",
+    "en": "Gorgan"
+  }
+]

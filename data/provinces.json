@@ -1,0 +1,157 @@
+[
+  {
+    "id": 1,
+    "fa": "آذربایجان شرقی",
+    "en": "East Azerbaijan"
+  },
+  {
+    "id": 2,
+    "fa": "آذربایجان غربی",
+    "en": "West Azerbaijan"
+  },
+  {
+    "id": 3,
+    "fa": "اردبیل",
+    "en": "Ardabil"
+  },
+  {
+    "id": 4,
+    "fa": "اصفهان",
+    "en": "Isfahan"
+  },
+  {
+    "id": 5,
+    "fa": "البرز",
+    "en": "Alborz"
+  },
+  {
+    "id": 6,
+    "fa": "ایلام",
+    "en": "Ilam"
+  },
+  {
+    "id": 7,
+    "fa": "بوشهر",
+    "en": "Bushehr"
+  },
+  {
+    "id": 8,
+    "fa": "تهران",
+    "en": "Tehran"
+  },
+  {
+    "id": 9,
+    "fa": "چهارمحال و بختیاری",
+    "en": "Chaharmahal and Bakhtiari"
+  },
+  {
+    "id": 10,
+    "fa": "خراسان جنوبی",
+    "en": "South Khorasan"
+  },
+  {
+    "id": 11,
+    "fa": "خراسان رضوی",
+    "en": "Razavi Khorasan"
+  },
+  {
+    "id": 12,
+    "fa": "خراسان شمالی",
+    "en": "North Khorasan"
+  },
+  {
+    "id": 13,
+    "fa": "خوزستان",
+    "en": "Khuzestan"
+  },
+  {
+    "id": 14,
+    "fa": "زنجان",
+    "en": "Zanjan"
+  },
+  {
+    "id": 15,
+    "fa": "سمنان",
+    "en": "Semnan"
+  },
+  {
+    "id": 16,
+    "fa": "سیستان و بلوچستان",
+    "en": "Sistan and Baluchestan"
+  },
+  {
+    "id": 17,
+    "fa": "فارس",
+    "en": "Fars"
+  },
+  {
+    "id": 18,
+    "fa": "قزوین",
+    "en": "Qazvin"
+  },
+  {
+    "id": 19,
+    "fa": "قم",
+    "en": "Qom"
+  },
+  {
+    "id": 20,
+    "fa": "کردستان",
+    "en": "Kurdistan"
+  },
+  {
+    "id": 21,
+    "fa": "کرمان",
+    "en": "Kerman"
+  },
+  {
+    "id": 22,
+    "fa": "کرمانشاه",
+    "en": "Kermanshah"
+  },
+  {
+    "id": 23,
+    "fa": "کهگیلویه و بویراحمد",
+    "en": "Kohgiluyeh and Boyer-Ahmad"
+  },
+  {
+    "id": 24,
+    "fa": "گیلان",
+    "en": "Gilan"
+  },
+  {
+    "id": 25,
+    "fa": "لرستان",
+    "en": "Lorestan"
+  },
+  {
+    "id": 26,
+    "fa": "مازندران",
+    "en": "Mazandaran"
+  },
+  {
+    "id": 27,
+    "fa": "مرکزی",
+    "en": "Markazi"
+  },
+  {
+    "id": 28,
+    "fa": "هرمزگان",
+    "en": "Hormozgan"
+  },
+  {
+    "id": 29,
+    "fa": "همدان",
+    "en": "Hamadan"
+  },
+  {
+    "id": 30,
+    "fa": "یزد",
+    "en": "Yazd"
+  },
+  {
+    "id": 31,
+    "fa": "گلستان",
+    "en": "Golestan"
+  }
+]

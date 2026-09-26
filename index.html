@@ -1,92 +1,457 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فرم ثبت‌نام</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f4f6fa"
+    >
+
+    <title>Form Pilot</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
 </head>
+
 <body>
 
-<div class="container">
-  <h1>فرم ثبت‌نام</h1>
+    <!-- Background -->
+    <div class="background-grid"></div>
 
-  <form id="registerForm" novalidate>
+    <main class="page">
 
-    <div class="form-group">
-      <label for="firstName">نام</label>
-      <input type="text" id="firstName" name="firstName" required>
-      <span class="error" id="err-firstName"></span>
-    </div>
+        <section class="form-card">
 
-    <div class="form-group">
-      <label for="lastName">نام خانوادگی</label>
-      <input type="text" id="lastName" name="lastName" required>
-      <span class="error" id="err-lastName"></span>
-    </div>
+            <!-- Header -->
+            <header class="form-header">
 
-    <div class="form-group">
-      <label for="fatherName">نام پدر</label>
-      <input type="text" id="fatherName" name="fatherName" required>
-      <span class="error" id="err-fatherName"></span>
-    </div>
+                <div class="brand-area">
 
-    <div class="form-group">
-      <label for="nationalCode">کد ملی</label>
-      <input type="text" id="nationalCode" name="nationalCode" maxlength="10" inputmode="numeric" required>
-      <span class="error" id="err-nationalCode"></span>
-    </div>
+                    <div class="brand-icon">
+                        FP
+                    </div>
 
-    <div class="form-group">
-      <label for="phone">تلفن همراه</label>
-      <input type="text" id="phone" name="phone" maxlength="11" inputmode="numeric" required>
-      <span class="error" id="err-phone"></span>
-    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">
+                            FORM PILOT
+                        </span>
 
-    <div class="form-group">
-      <label for="province">استان</label>
-      <input type="text" id="province" name="province" required>
-      <span class="error" id="err-province"></span>
-    </div>
+                        <span
+                            class="brand-tagline"
+                            data-i18n="secureForm"
+                        >
+                            فرم امن و ساده
+                        </span>
+                    </div>
 
-    <div class="form-group">
-      <label for="city">شهر</label>
-      <input type="text" id="city" name="city" required>
-      <span class="error" id="err-city"></span>
-    </div>
+                </div>
 
-    <div class="form-group">
-      <label for="address">آدرس</label>
-      <textarea id="address" name="address" rows="3" required></textarea>
-      <span class="error" id="err-address"></span>
-    </div>
 
-    <div class="form-group">
-      <label for="email">ایمیل</label>
-      <input type="email" id="email" name="email" required>
-      <span class="error" id="err-email"></span>
-    </div>
+                <div class="header-actions">
 
-    <div class="form-group captcha-group">
-      <label for="captchaInput">کد امنیتی</label>
-      <div class="captcha-row">
-        <canvas id="captchaCanvas" width="150" height="50"></canvas>
-        <button type="button" id="refreshCaptchaBtn" title="تازه‌سازی کد امنیتی">
-          <span id="refreshIcon">↻</span>
-        </button>
-      </div>
-      <div id="refreshTimer" class="refresh-timer"></div>
-      <input type="text" id="captchaInput" name="captchaInput" maxlength="6" required>
-      <span class="error" id="err-captcha"></span>
-    </div>
+                    <!-- Theme -->
+                    <button
+                        type="button"
+                        id="themeToggle"
+                        class="icon-button"
+                        aria-label="Switch theme"
+                        title="Theme"
+                    >
+                        <span id="themeIcon">☾</span>
+                    </button>
 
-    <button type="submit" class="submit-btn">ثبت‌نام</button>
 
-    <div id="successMsg" class="success-msg"></div>
+                    <!-- Language -->
+                    <button
+                        type="button"
+                        id="languageToggle"
+                        class="language-button"
+                    >
+                        EN
+                    </button>
 
-  </form>
-</div>
+                </div>
 
-<script src="script.js"></script>
+            </header>
+
+
+            <!-- Intro -->
+            <div class="intro">
+
+                <h1 data-i18n="title">
+                    فرم ثبت اطلاعات
+                </h1>
+
+                <p data-i18n="subtitle">
+                    اطلاعات خود را با دقت وارد کنید
+                </p>
+
+            </div>
+
+
+            <!-- Location status -->
+            <div
+                id="locationStatus"
+                class="location-status"
+                aria-live="polite"
+            >
+                در حال بارگذاری استان‌ها و شهرها...
+            </div>
+
+
+            <!-- Form -->
+            <form
+                id="registerForm"
+                class="register-form"
+                novalidate
+            >
+
+                <!-- First Name -->
+                <div class="field-group">
+
+                    <label
+                        for="firstName"
+                        data-i18n="firstName"
+                    >
+                        نام
+                    </label>
+
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        autocomplete="given-name"
+                        data-i18n-placeholder="firstNamePlaceholder"
+                        placeholder="نام خود را وارد کنید"
+                    >
+
+                </div>
+
+
+                <!-- Last Name -->
+                <div class="field-group">
+
+                    <label
+                        for="lastName"
+                        data-i18n="lastName"
+                    >
+                        نام خانوادگی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        autocomplete="family-name"
+                        data-i18n-placeholder="lastNamePlaceholder"
+                        placeholder="نام خانوادگی"
+                    >
+
+                </div>
+
+
+                <!-- Father's Name -->
+                <div class="field-group">
+
+                    <label
+                        for="fatherName"
+                        data-i18n="fatherName"
+                    >
+                        نام پدر
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fatherName"
+                        name="fatherName"
+                        autocomplete="off"
+                        data-i18n-placeholder="fatherNamePlaceholder"
+                        placeholder="نام پدر"
+                    >
+
+                </div>
+
+
+                <!-- National ID -->
+                <div class="field-group">
+
+                    <label
+                        for="nationalCode"
+                        data-i18n="nationalCode"
+                    >
+                        کد ملی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nationalCode"
+                        name="nationalCode"
+                        inputmode="numeric"
+                        maxlength="10"
+                        autocomplete="off"
+                        data-i18n-placeholder="nationalCodePlaceholder"
+                        placeholder="۱۰ رقم"
+                    >
+
+                </div>
+
+
+                <!-- Phone -->
+                <div class="field-group">
+
+                    <label
+                        for="phone"
+                        data-i18n="phone"
+                    >
+                        تلفن همراه
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        inputmode="tel"
+                        autocomplete="tel"
+                        data-i18n-placeholder="phonePlaceholder"
+                        placeholder="09123456789"
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="field-group">
+
+                    <label
+                        for="email"
+                        data-i18n="email"
+                    >
+                        ایمیل
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        data-i18n-placeholder="emailPlaceholder"
+                        placeholder="example@email.com"
+                    >
+
+                </div>
+
+
+                <!-- Province -->
+                <div class="field-group autocomplete-field">
+
+                    <label
+                        for="province"
+                        data-i18n="province"
+                    >
+                        استان
+                    </label>
+
+                    <div class="autocomplete-wrapper">
+
+                        <input
+                            type="text"
+                            id="province"
+                            name="province"
+                            autocomplete="off"
+                            data-i18n-placeholder="provincePlaceholder"
+                            placeholder="استان را جستجو کنید"
+                            role="combobox"
+                            aria-autocomplete="list"
+                        >
+
+                        <div
+                            id="provinceSuggestions"
+                            class="autocomplete-list"
+                            role="listbox"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- City -->
+                <div class="field-group autocomplete-field">
+
+                    <label
+                        for="city"
+                        data-i18n="city"
+                    >
+                        شهر
+                    </label>
+
+                    <div class="autocomplete-wrapper">
+
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            autocomplete="off"
+                            disabled
+                            data-i18n-placeholder="cityPlaceholder"
+                            placeholder="ابتدا استان را انتخاب کنید"
+                            role="combobox"
+                            aria-autocomplete="list"
+                        >
+
+                        <div
+                            id="citySuggestions"
+                            class="autocomplete-list"
+                            role="listbox"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Address -->
+                <div class="field-group field-full">
+
+                    <label
+                        for="address"
+                        data-i18n="address"
+                    >
+                        آدرس
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        rows="4"
+                        autocomplete="street-address"
+                        data-i18n-placeholder="addressPlaceholder"
+                        placeholder="آدرس کامل خود را وارد کنید"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- CAPTCHA -->
+                <div class="field-group field-full">
+
+                    <label
+                        for="captchaInput"
+                        data-i18n="captcha"
+                    >
+                        کد امنیتی
+                    </label>
+
+                    <div class="captcha-row">
+
+                        <div class="captcha-box">
+
+                            <canvas
+                                id="captchaCanvas"
+                                width="180"
+                                height="60"
+                            ></canvas>
+
+                            <button
+                                type="button"
+                                id="refreshCaptcha"
+                                class="captcha-refresh"
+                                aria-label="Refresh CAPTCHA"
+                                title="Refresh CAPTCHA"
+                            >
+                                ↻
+                            </button>
+
+                        </div>
+
+
+                        <div class="captcha-input-area">
+
+                            <input
+                                type="text"
+                                id="captchaInput"
+                                name="captcha"
+                                maxlength="5"
+                                autocomplete="off"
+                                data-i18n-placeholder="captchaPlaceholder"
+                                placeholder="کد تصویر را وارد کنید"
+                            >
+
+                            <span
+                                id="captchaTimer"
+                                class="captcha-timer"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Submit -->
+                <div class="form-actions field-full">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        <span data-i18n="submit">
+                            ثبت اطلاعات
+                        </span>
+
+                        <span class="submit-arrow">
+                            →
+                        </span>
+                    </button>
+
+                    <div
+                        id="successMessage"
+                        class="success-message"
+                        aria-live="polite"
+                    ></div>
+
+                </div>
+
+            </form>
+
+
+            <!-- Footer -->
+            <footer class="form-footer">
+
+                <span>
+                    FORM PILOT
+                </span>
+
+                <span class="footer-dot">
+                    •
+                </span>
+
+                <span data-i18n="secureForm">
+                    فرم امن و ساده
+                </span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="./js/app.js"
+    ></script>
+
 </body>
+
 </html>
