@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+  background: #f2f4f7;
+  margin: 0;
+  padding: 30px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background: #fff;
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 24px;
+  color: #222;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #444;
+}
+
+input, textarea {
+  padding: 10px 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus {
+  border-color: #4f7df3;
+}
+
+input.invalid, textarea.invalid {
+  border-color: #e0453c;
+}
+
+.error {
+  color: #e0453c;
+  font-size: 12px;
+  min-height: 16px;
+  margin-top: 4px;
+}
+
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#captchaCanvas {
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+#refreshCaptchaBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#refreshCaptchaBtn:hover:not(:disabled) {
+  background: #eef2ff;
+}
+
+#refreshCaptchaBtn:active:not(:disabled) {
+  transform: rotate(90deg);
+}
+
+#refreshCaptchaBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.refresh-timer {
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+  min-height: 14px;
+}
+
+#captchaInput {
+  margin-top: 10px;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: #4f7df3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #3d67d6;
+}
+
+.success-msg {
+  margin-top: 14px;
+  text-align: center;
+  color: #1e9e5a;
+  font-size: 14px;
+  min-height: 18px;
+}
