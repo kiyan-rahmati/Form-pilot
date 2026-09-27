@@ -1,5 +1,33 @@
 Form Pilot 📝
 
+<a
+  href="https://github.com/kiyan-rahmati/Form-pilot"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="github-link"
+>
+  <span>View on GitHub</span>
+  <span>↗</span>
+</a>
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #111827;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .25s ease;
+}
+
+.github-link:hover {
+    transform: translateY(-2px);
+    background: #1f2937;
+}
+
 A modern, responsive and bilingual registration form built with HTML, CSS, JavaScript and PHP.
 
 Form Pilot is designed as a practical full-stack form project with client-side validation, CAPTCHA protection, Persian/English language support, province and city autocomplete, light/dark themes, and a prepared PHP/MySQL backend.
