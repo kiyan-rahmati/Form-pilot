@@ -1,7 +1,13 @@
 const translations = {
+
     fa: {
         title: "فرم ثبت اطلاعات",
-        subtitle: "اطلاعات خود را با دقت وارد کنید",
+        subtitle: "همه‌ی فیلدها الزامی‌اند، به‌جز تصویر پروفایل.",
+
+        sectionIdentity: "اطلاعات هویتی",
+        sectionContact: "راه‌های ارتباط",
+        sectionLocation: "محل سکونت",
+        sectionVerify: "تصویر و تأیید",
 
         firstName: "نام",
         lastName: "نام خانوادگی",
@@ -25,9 +31,18 @@ const translations = {
         addressPlaceholder: "آدرس کامل خود را وارد کنید",
         captchaPlaceholder: "کد تصویر را وارد کنید",
 
-        submit: "ثبت اطلاعات",
+        imageLabel: "تصویر پروفایل",
+        imageButton: "انتخاب تصویر",
+        imageChange: "تغییر تصویر",
+        imageHint: "JPG، PNG یا WebP تا ۲ مگابایت",
+        imageTypeError: "فقط JPG، PNG و WebP مجاز هستند.",
+        imageSizeError: "حجم تصویر نباید بیشتر از 2MB باشد.",
 
-        refreshAfter: "تازه‌سازی مجدد تا {n} ثانیه دیگر",
+        submit: "ثبت اطلاعات",
+        submitting: "در حال ثبت...",
+        refreshCaptcha: "کد جدید",
+
+        refreshAfter: "کد جدید تا {n} ثانیه دیگر",
 
         required: "این فیلد الزامی است",
         invalidNationalCode: "کد ملی معتبر نیست",
@@ -45,25 +60,44 @@ const translations = {
 
         noResults: "موردی پیدا نشد",
 
-        success: "اطلاعات با موفقیت ثبت شد ✓",
+        serverError: "ارتباط با سرور برقرار نشد. اتصال اینترنت را بررسی و دوباره تلاش کنید.",
+
+        successTitle: "اطلاعات شما ثبت شد",
+        successText: "نیازی به اقدام دیگری نیست. این کد را برای پیگیری نگه دارید.",
+        trackingCode: "کد پیگیری",
+        newSubmission: "ثبت فرم جدید",
+
+        previewLabel: "پیش‌نمایش زنده",
+        previewHint: "با پر کردن فرم، کارت کامل می‌شود.",
+        pvName: "نام و نام خانوادگی",
+        pvFather: "نام پدر: {name}",
+        pvFatherEmpty: "نام پدر",
+        pvCode: "کد ملی",
+        pvPhone: "موبایل",
+        pvLocation: "استان و شهر",
 
         secureForm: "فرم امن و ساده"
     },
 
     en: {
         title: "Registration Form",
-        subtitle: "Please enter your information carefully",
+        subtitle: "All fields are required except the profile photo.",
 
-        firstName: "First Name",
-        lastName: "Last Name",
-        fatherName: "Father's Name",
+        sectionIdentity: "Identity",
+        sectionContact: "Contact",
+        sectionLocation: "Location",
+        sectionVerify: "Photo and verification",
+
+        firstName: "First name",
+        lastName: "Last name",
+        fatherName: "Father's name",
         nationalCode: "National ID",
         phone: "Phone",
         email: "Email",
         province: "Province",
         city: "City",
         address: "Address",
-        captcha: "Security Code",
+        captcha: "Security code",
 
         firstNamePlaceholder: "Enter your first name",
         lastNamePlaceholder: "Enter your last name",
@@ -76,9 +110,18 @@ const translations = {
         addressPlaceholder: "Enter your full address",
         captchaPlaceholder: "Enter the code",
 
-        submit: "Submit",
+        imageLabel: "Profile photo",
+        imageButton: "Choose photo",
+        imageChange: "Change photo",
+        imageHint: "JPG, PNG or WebP, up to 2 MB",
+        imageTypeError: "Only JPG, PNG and WebP files are allowed.",
+        imageSizeError: "The image must be 2 MB or smaller.",
 
-        refreshAfter: "Refresh available in {n} seconds",
+        submit: "Submit information",
+        submitting: "Submitting...",
+        refreshCaptcha: "New code",
+
+        refreshAfter: "New code available in {n} s",
 
         required: "This field is required",
         invalidNationalCode: "Invalid national ID",
@@ -96,7 +139,21 @@ const translations = {
 
         noResults: "No results found",
 
-        success: "Information submitted successfully ✓",
+        serverError: "Could not reach the server. Check your connection and try again.",
+
+        successTitle: "Your information was submitted",
+        successText: "Nothing else to do. Keep this code if you need to follow up.",
+        trackingCode: "Tracking code",
+        newSubmission: "Submit another form",
+
+        previewLabel: "Live preview",
+        previewHint: "The card fills in as you complete the form.",
+        pvName: "First and last name",
+        pvFather: "Father: {name}",
+        pvFatherEmpty: "Father's name",
+        pvCode: "National ID",
+        pvPhone: "Mobile",
+        pvLocation: "Province and city",
 
         secureForm: "Simple & secure form"
     }
@@ -105,6 +162,10 @@ const translations = {
 
 let currentLanguage =
     localStorage.getItem("formPilotLanguage") || "fa";
+
+if (!translations[currentLanguage]) {
+    currentLanguage = "fa";
+}
 
 
 export function t(key, values = {}) {
@@ -133,48 +194,41 @@ export function setLanguage(language) {
 
     currentLanguage = language;
 
-    localStorage.setItem(
-        "formPilotLanguage",
-        currentLanguage
-    );
+    localStorage.setItem("formPilotLanguage", currentLanguage);
 
     document.documentElement.lang = currentLanguage;
 
     document.documentElement.dir =
-        currentLanguage === "fa"
-            ? "rtl"
-            : "ltr";
+        currentLanguage === "fa" ? "rtl" : "ltr";
 
-    document
-        .querySelectorAll("[data-i18n]")
-        .forEach(element => {
-            const key = element.dataset.i18n;
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const text = translations[currentLanguage][element.dataset.i18n];
 
-            if (translations[currentLanguage][key]) {
-                element.textContent =
-                    translations[currentLanguage][key];
-            }
-        });
+        if (text) {
+            element.textContent = text;
+        }
+    });
 
-    document
-        .querySelectorAll("[data-i18n-placeholder]")
-        .forEach(element => {
-            const key =
-                element.dataset.i18nPlaceholder;
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+        const text =
+            translations[currentLanguage][element.dataset.i18nPlaceholder];
 
-            if (translations[currentLanguage][key]) {
-                element.placeholder =
-                    translations[currentLanguage][key];
-            }
-        });
+        if (text) {
+            element.placeholder = text;
+        }
+    });
 
-    const languageButton =
-        document.getElementById("languageToggle");
+    const languageButton = document.getElementById("languageToggle");
 
     if (languageButton) {
         languageButton.textContent =
+            currentLanguage === "fa" ? "EN" : "FA";
+
+        languageButton.setAttribute(
+            "aria-label",
             currentLanguage === "fa"
-                ? "EN"
-                : "FA";
+                ? "Switch to English"
+                : "تغییر زبان به فارسی"
+        );
     }
 }

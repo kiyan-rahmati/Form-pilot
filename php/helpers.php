@@ -3,23 +3,113 @@
 declare(strict_types=1);
 
 
-/**
- * Return JSON response
- */
-function jsonResponse(
+/* -----------------------------------------
+   Messages (fa / en)
+----------------------------------------- */
+
+function requestLanguage(): string
+{
+    return (($_POST["lang"] ?? "fa") === "en") ? "en" : "fa";
+}
+
+
+function msg(string $key): string
+{
+    static $messages = [
+
+        "method" => [
+            "fa" => "روش درخواست مجاز نیست.",
+            "en" => "Method not allowed."
+        ],
+
+        "required" => [
+            "fa" => "فیلدهای ضروری را کامل کنید.",
+            "en" => "Please fill in all required fields."
+        ],
+
+        "tooLong" => [
+            "fa" => "مقدار واردشده بیش از حد طولانی است.",
+            "en" => "The value is too long."
+        ],
+
+        "nationalCode" => [
+            "fa" => "کد ملی معتبر نیست.",
+            "en" => "Invalid national ID."
+        ],
+
+        "phone" => [
+            "fa" => "شماره تلفن معتبر نیست.",
+            "en" => "Invalid phone number."
+        ],
+
+        "email" => [
+            "fa" => "ایمیل معتبر نیست.",
+            "en" => "Invalid email address."
+        ],
+
+        "duplicate" => [
+            "fa" => "این کد ملی قبلاً ثبت شده است.",
+            "en" => "This national ID is already registered."
+        ],
+
+        "imageUpload" => [
+            "fa" => "آپلود تصویر ناموفق بود.",
+            "en" => "Image upload failed."
+        ],
+
+        "imageSize" => [
+            "fa" => "حجم تصویر نباید بیشتر از 2MB باشد.",
+            "en" => "The image must be 2 MB or smaller."
+        ],
+
+        "imageType" => [
+            "fa" => "فرمت تصویر مجاز نیست.",
+            "en" => "This image format is not allowed."
+        ],
+
+        "imageInvalid" => [
+            "fa" => "فایل انتخاب‌شده تصویر معتبر نیست.",
+            "en" => "The selected file is not a valid image."
+        ],
+
+        "saveFailed" => [
+            "fa" => "ذخیره اطلاعات انجام نشد. لطفاً دوباره تلاش کنید.",
+            "en" => "Your information could not be saved. Please try again."
+        ],
+
+        "success" => [
+            "fa" => "اطلاعات با موفقیت ثبت شد.",
+            "en" => "Your information was submitted successfully."
+        ],
+    ];
+
+    return $messages[$key][requestLanguage()] ?? $key;
+}
+
+
+/* -----------------------------------------
+   JSON response
+----------------------------------------- */
+
+function respond(
+    int $status,
     bool $success,
     string $message,
-    array $data = []
-): void {
+    array $extra = []
+): never {
+
+    http_response_code($status);
 
     header("Content-Type: application/json; charset=utf-8");
 
     echo json_encode(
-        [
-            "success" => $success,
-            "message" => $message,
-            "data" => $data
-        ],
+        array_merge(
+            [
+                "success" => $success,
+                "message" => $message
+            ],
+            $extra
+        ),
         JSON_UNESCAPED_UNICODE
     );
 
@@ -27,101 +117,74 @@ function jsonResponse(
 }
 
 
-/**
- * Get POST value safely
- */
+function fail(
+    int $status,
+    string $messageKey,
+    ?string $field = null
+): never {
+
+    respond(
+        $status,
+        false,
+        msg($messageKey),
+        $field !== null ? ["field" => $field] : []
+    );
+}
+
+
+/* -----------------------------------------
+   Input helpers
+----------------------------------------- */
+
 function postValue(string $key): string
 {
     return trim((string)($_POST[$key] ?? ""));
 }
 
 
-/**
- * Normalize Persian / Arabic digits to English digits
- */
 function normalizeDigits(string $value): string
 {
-    $persian = [
-        "۰", "۱", "۲", "۳", "۴",
-        "۵", "۶", "۷", "۸", "۹"
-    ];
+    return strtr(
+        $value,
+        [
+            "۰" => "0", "۱" => "1", "۲" => "2", "۳" => "3", "۴" => "4",
+            "۵" => "5", "۶" => "6", "۷" => "7", "۸" => "8", "۹" => "9",
 
-    $arabic = [
-        "٠", "١", "٢", "٣", "٤",
-        "٥", "٦", "٧", "٨", "٩"
-    ];
-
-    $english = [
-        "0", "1", "2", "3", "4",
-        "5", "6", "7", "8", "9"
-    ];
-
-    $value = str_replace($persian, $english, $value);
-    $value = str_replace($arabic, $english, $value);
-
-    return $value;
+            "٠" => "0", "١" => "1", "٢" => "2", "٣" => "3", "٤" => "4",
+            "٥" => "5", "٦" => "6", "٧" => "7", "٨" => "8", "٩" => "9"
+        ]
+    );
 }
 
 
-/**
- * Validate Iranian mobile number
- */
 function isValidPhone(string $phone): bool
 {
-    $phone = normalizeDigits($phone);
-
-    $phone = preg_replace(
-        "/[\s\-]/u",
-        "",
-        $phone
-    );
-
-    return (bool)preg_match(
-        "/^09\d{9}$/",
-        $phone
-    );
+    return (bool)preg_match("/^09\d{9}$/", $phone);
 }
 
 
-/**
- * Validate Iranian national code
- */
 function isValidNationalCode(string $code): bool
 {
-    $code = normalizeDigits($code);
-
-    $code = preg_replace(
-        "/\s/u",
-        "",
-        $code
-    );
-
     if (!preg_match("/^\d{10}$/", $code)) {
         return false;
     }
 
+    // Reject 0000000000, 1111111111, ...
     if (preg_match("/^(\d)\1{9}$/", $code)) {
         return false;
     }
 
-    $digits = array_map(
-        "intval",
-        str_split($code)
-    );
-
     $sum = 0;
 
     for ($i = 0; $i < 9; $i++) {
-        $sum += $digits[$i] * (10 - $i);
+        $sum += ((int)$code[$i]) * (10 - $i);
     }
 
     $remainder = $sum % 11;
 
-    $checkDigit = $digits[9];
+    $checkDigit = $remainder < 2
+        ? $remainder
+        : 11 - $remainder;
 
-    if ($remainder < 2) {
-        return $checkDigit === $remainder;
-    }
-
-    return $checkDigit === (11 - $remainder);
+    return (int)$code[9] === $checkDigit;
 }

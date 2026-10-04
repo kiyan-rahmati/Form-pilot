@@ -83,7 +83,7 @@ export async function loadLocations() {
         cities = citiesData;
 
         if (locationStatus) {
-            locationStatus.textContent = t("locationsReady");
+            locationStatus.textContent = "";
         }
 
         setupAutocomplete();
@@ -198,6 +198,16 @@ function showEmptyMessage(container) {
 }
 
 /* -----------------------------
+   Tell other modules (live preview) that a value was picked.
+   "change" is used on purpose: the handlers below only listen
+   to "input", so the selection state is not reset.
+----------------------------- */
+
+function announceChange(element) {
+    element?.dispatchEvent(new Event("change", { bubbles: true }));
+}
+
+/* -----------------------------
    Select province
 ----------------------------- */
 
@@ -219,6 +229,9 @@ function selectProvince(province) {
 
     clearInvalid(provinceInput);
     clearInvalid(cityInput);
+
+    announceChange(provinceInput);
+    announceChange(cityInput);
 }
 
 /* -----------------------------
@@ -235,6 +248,8 @@ function selectCity(city) {
     citySuggestions?.classList.remove("show");
 
     clearInvalid(cityInput);
+
+    announceChange(cityInput);
 }
 
 /* -----------------------------
@@ -349,7 +364,7 @@ export function refreshLocationLabels() {
     }
 
     if (locationStatus) {
-        locationStatus.textContent = t("locationsReady");
+        locationStatus.textContent = "";
     }
 }
 

@@ -1,0 +1,2 @@
+# Submission records contain personal data - never serve them over HTTP.
+Require all denied

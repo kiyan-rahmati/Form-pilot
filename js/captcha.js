@@ -1,3 +1,5 @@
+import { t } from "./i18n.js";
+
 const CAPTCHA_LENGTH = 5;
 const CAPTCHA_EXPIRE_TIME = 30;
 
@@ -213,16 +215,8 @@ function updateTimer() {
         return;
     }
 
-    const language =
-        document.documentElement.lang || "fa";
-
-    if (language === "fa") {
-        timerElement.textContent =
-            `تازه‌سازی مجدد تا ${refreshCooldown} ثانیه دیگر`;
-    } else {
-        timerElement.textContent =
-            `Refresh available in ${refreshCooldown} seconds`;
-    }
+    timerElement.textContent =
+        t("refreshAfter", { n: refreshCooldown });
 }
 
 

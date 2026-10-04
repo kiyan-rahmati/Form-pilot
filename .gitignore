@@ -1,0 +1,5 @@
+# Personal data collected by the form must never be committed
+storage/*.json
+uploads/*
+!uploads/.htaccess
+!storage/.htaccess

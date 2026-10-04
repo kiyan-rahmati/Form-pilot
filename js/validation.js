@@ -61,7 +61,7 @@ function normalizeDigits(value) {
    Show field error
 ================================ */
 
-function showError(id, message) {
+export function showError(id, message) {
     const input =
         document.getElementById(id);
 

@@ -2,38 +2,33 @@
 
 declare(strict_types=1);
 
-$host = "127.0.0.1";
-$port = "3306";
-$dbname = "form_pilot";
-$username = "root";
-$password = "";
+/**
+ * Form Pilot configuration.
+ *
+ * Every database value can be overridden with an environment variable,
+ * so credentials never have to live in the repository.
+ */
 
-$dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4";
+$env = static function (string $name, string $default): string {
+    $value = getenv($name);
 
-try {
-    $pdo = new PDO(
-        $dsn,
-        $username,
-        $password,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ]
-    );
-} catch (PDOException $e) {
+    return $value === false ? $default : $value;
+};
 
-    http_response_code(500);
+return [
 
-    header("Content-Type: application/json; charset=utf-8");
+    "db" => [
+        "host" => $env("FP_DB_HOST", "127.0.0.1"),
+        "port" => $env("FP_DB_PORT", "3306"),
+        "name" => $env("FP_DB_NAME", "form_pilot"),
+        "user" => $env("FP_DB_USER", "root"),
+        "pass" => $env("FP_DB_PASS", ""),
+    ],
 
-    echo json_encode(
-        [
-            "success" => false,
-            "message" => "Database connection failed."
-        ],
-        JSON_UNESCAPED_UNICODE
-    );
+    "paths" => [
+        "uploads" => dirname(__DIR__) . "/uploads",
+        "storage" => dirname(__DIR__) . "/storage",
+    ],
 
-    exit;
-}
+    "max_image_bytes" => 2 * 1024 * 1024,
+];
